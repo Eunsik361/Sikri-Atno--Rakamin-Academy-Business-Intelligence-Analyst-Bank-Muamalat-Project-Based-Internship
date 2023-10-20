@@ -1,0 +1,17 @@
+SELECT
+`finaltaskpbi_bankmuamalatbia.orders`.DATE AS order_date,
+`finaltaskpbi_bankmuamalatbia.productcategory`.CategoryName AS category_name,
+`finaltaskpbi_bankmuamalatbia.products`.ProdName AS product_name,
+`finaltaskpbi_bankmuamalatbia.products`.Price AS product_price,
+`finaltaskpbi_bankmuamalatbia.orders`.Quantity AS order_qty,
+(`finaltaskpbi_bankmuamalatbia.orders`.Quantity*`finaltaskpbi_bankmuamalatbia.products`.Price) AS total_sales,
+`finaltaskpbi_bankmuamalatbia.customers`.CustomerEmail AS cust_email,
+`finaltaskpbi_bankmuamalatbia.customers`.CustomerCity AS cust_city,
+FROM `finaltaskpbi_bankmuamalatbia.orders` 
+INNER JOIN
+`finaltaskpbi_bankmuamalatbia.customers` ON `finaltaskpbi_bankmuamalatbia.orders`.CustomerID=`finaltaskpbi_bankmuamalatbia.customers`.CustomerID
+INNER JOIN
+`finaltaskpbi_bankmuamalatbia.products` ON `finaltaskpbi_bankmuamalatbia.orders`.ProdNumber=`finaltaskpbi_bankmuamalatbia.products`.ProdNumber
+INNER JOIN
+`finaltaskpbi_bankmuamalatbia.productcategory` ON `finaltaskpbi_bankmuamalatbia.products`.Category=`finaltaskpbi_bankmuamalatbia.productcategory`.CategoryID
+ORDER BY order_date ASC;
